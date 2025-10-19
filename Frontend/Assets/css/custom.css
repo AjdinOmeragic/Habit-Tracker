@@ -1,0 +1,1210 @@
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* ----------------------- 1) ROOT COLORS ------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+:root {
+  --primary-color: #2e8b57;
+  --primary-dark: #388e3c;
+  --primary-light: #c8e6c9;
+  --secondary-color: #4682b4;
+  --secondary-dark: #1976d2;
+  --accent-color: #ff9800;
+  --background-color: #f5f9fc;
+  --surface-color: #ffffff;
+  --text-primary: #2e3a4d;
+  --text-secondary: #6b7280;
+  --text-white: #ffffff;
+  --border-color: #e1e8ed;
+  --success-color: #4caf50;
+  --warning-color: #ffc107;
+  --error-color: #f44336;
+  --info-color: #2196f3;
+  --header-bg: var(--primary-color);
+  --footer-bg: var(--text-primary);
+  --card-bg: var(--surface-color);
+  --button-primary: var(--primary-color);
+  --button-hover: var(--primary-dark);
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* ----------------------- 2) STRUCTURE --------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--background-color);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-primary);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 70px;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/*--------------------------------------------------------------------------------*/
+/* --------------------- TEXT CSS ------------------------------------------------*/
+/*--------------------------------------------------------------------------------*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* -------------------- 3) COMPONENTS ----------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.container-footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
+  margin-bottom: 2rem;
+}
+
+/*--------------------------------------------------------------------------------*/
+/* --------------------- BUTTONS -------------------------------------------------*/
+/*--------------------------------------------------------------------------------*/
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-primary {
+  background: var(--button-primary);
+  color: var(--text-white);
+}
+
+.btn-primary:hover {
+  background: var(--button-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.btn-secondary {
+  background: var(--secondary-color);
+  color: var(--text-white);
+}
+
+.btn-secondary:hover {
+  background: var(--secondary-dark);
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background-color: var(--error-color);
+  color: var(--text-white);
+}
+
+.btn-danger:hover {
+  background-color: #d32f2f;
+  transform: translateY(-2px);
+}
+
+.btn-full {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+/*--------------------------------------------------------------------------------*/
+/* --------------------- FORMS ---------------------------------------------------*/
+/*--------------------------------------------------------------------------------*/
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* -------------------- 4) NAVIGATION ----------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+nav {
+  background: var(--header-bg);
+  height: 70px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+label.logo {
+  color: var(--text-white);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: transform 0.3s ease;
+}
+
+label.logo:hover {
+  transform: scale(1.05);
+}
+
+label.logo a {
+  color: inherit;
+  text-decoration: none;
+}
+
+nav ul {
+  display: flex;
+  gap: 2rem;
+}
+
+nav ul li {
+  line-height: 70px;
+}
+
+nav ul li a {
+  color: var(--text-white);
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--text-white);
+}
+
+.checkbtn {
+  font-size: 1.5rem;
+  color: var(--text-white);
+  cursor: pointer;
+  display: none;
+}
+
+#check {
+  display: none;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* -------------------- 5) FOOTER --------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.footer {
+  background-color: var(--footer-bg);
+  padding: 2rem 0 1rem;
+  margin-top: auto;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.footer-col {
+  flex: 1;
+  min-width: 200px;
+  padding: 0 10px;
+  margin-bottom: 1rem;
+}
+
+.footer-col h4 {
+  font-size: 1.1rem;
+  color: var(--text-white);
+  text-transform: capitalize;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  position: relative;
+}
+
+.footer-col h4::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  background-color: var(--accent-color);
+  height: 2px;
+  width: 40px;
+}
+
+.footer-col ul li:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
+.footer-col ul li a {
+  font-size: 0.9rem;
+  text-transform: capitalize;
+  color: #bbbbbb;
+  text-decoration: none;
+  font-weight: 400;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+  color: var(--text-white);
+  padding-left: 5px;
+}
+
+.footer-col .social-links {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-col .social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  width: 36px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: var(--text-white);
+  transition: all 0.5s ease;
+  font-size: 0.9rem;
+}
+
+.footer-col .social-links a:hover {
+  color: var(--footer-bg);
+  background-color: var(--text-white);
+  transform: translateY(-2px);
+}
+
+.footer-col .social-links p {
+  color: #bbbbbb;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  width: 100%;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* -------------------- 6) SPAPP ---------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+#spapp {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+main#spapp {
+  flex: 1;
+  display: block;
+}
+
+main#spapp > section {
+  display: none;
+  min-height: calc(100vh - 70px);
+  padding: 30px 20px 40px;
+  background: var(--background-color);
+}
+
+main#spapp > section:last-child {
+  display: block;
+}
+
+main#spapp > section:target {
+  display: block;
+  animation: appear 0.3s ease-out;
+}
+
+main#spapp > section:target ~ section {
+  display: none !important;
+}
+
+footer.footer {
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+main#spapp > section#error_404 {
+  background: var(--text-primary);
+  color: var(--text-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: calc(100vh - 70px);
+}
+
+/*--------------------------------------------------------------------------------*/
+/* --------------------- HERO CSS ------------------------------------------------*/
+/*--------------------------------------------------------------------------------*/
+.hero-section {
+  text-align: center;
+  padding: 4rem 0 3rem;
+  background: linear-gradient(
+    135deg,
+    var(--primary-light) 0%,
+    var(--background-color) 100%
+  );
+  border-radius: 0 0 30px 30px;
+  margin-bottom: 2rem;
+  min-height: auto;
+}
+
+.hero-section h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero-section p {
+  font-size: 1.3rem;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* -------------------- 7) HOME CSS ------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.home-section {
+  width: 100%;
+}
+
+.features-section {
+  padding: 5rem 0;
+  text-align: center;
+}
+
+.features-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: var(--text-primary);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.feature-item {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.feature-item:hover {
+  transform: translateY(-10px);
+  border-color: var(--primary-color);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.feature-item .feature-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.feature-item h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.feature-item p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.habits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.habit-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid var(--primary-color);
+  transition: transform 0.3s ease;
+}
+
+.habit-card:hover {
+  transform: translateY(-5px);
+}
+
+.about-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.about-content {
+  text-align: left;
+}
+
+.about-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.value-item {
+  padding: 1.5rem;
+  background: var(--primary-light);
+  border-radius: 8px;
+}
+
+.value-item h4 {
+  color: var(--primary-dark);
+  margin-bottom: 0.8rem;
+  font-size: 1.2rem;
+}
+
+.about-community ul {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+
+.about-community li {
+  padding: 0.5rem 0;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.about-join {
+  text-align: center;
+  background: linear-gradient(
+    135deg,
+    var(--primary-light) 0%,
+    var(--background-color) 100%
+  );
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.map-container {
+  margin-top: 1.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* -------------------- 8) HABITS CSS ---------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.habits-section {
+  width: 100%;
+}
+
+.add-habit {
+  margin-bottom: 2rem;
+}
+
+.add-habit h2 {
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.habit-form {
+  max-width: 500px;
+}
+
+.habits-list h2 {
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.habits-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.habit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.habit-header h3 {
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.habit-category {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.habit-category.health {
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+.habit-category.learning {
+  background-color: #e3f2fd;
+  color: var(--secondary-dark);
+}
+
+.habit-category.productivity {
+  background-color: #fff3e0;
+  color: #f57c00;
+}
+
+.habit-category.mindfulness {
+  background-color: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.habit-progress {
+  margin-bottom: 1rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: var(--border-color);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.habit-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* -------------------- 9) COMMUNITY CSS -------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.community-section {
+  width: 100%;
+}
+
+.create-post {
+  margin-bottom: 2rem;
+}
+
+.create-post h2 {
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.post-form {
+  max-width: 600px;
+}
+
+.post-form textarea {
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+}
+
+.posts-list h2 {
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.posts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.post-header {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.post-user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.post-user strong {
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.post-time {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+.post-content h3 {
+  color: var(--text-primary);
+  margin-bottom: 0.8rem;
+  font-size: 1.2rem;
+}
+
+.post-content p {
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.post-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.vote-btn,
+.comment-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 6px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--background-color);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.vote-btn:hover,
+.comment-btn:hover {
+  background: var(--primary-light);
+  color: var(--primary-color);
+}
+
+.vote-btn.active {
+  background: var(--primary-color);
+  color: var(--text-white);
+  border-color: var(--primary-color);
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* -------------------- 10) AUTHENTICATION CSS -------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.auth-section {
+  width: 100%;
+}
+
+.auth-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.auth-form {
+  width: 100%;
+}
+
+.auth-tabs {
+  display: flex;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.auth-tab {
+  padding: 1rem 2rem;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.auth-tab.active {
+  color: var(--primary-color);
+  border-bottom: 3px solid var(--primary-color);
+}
+
+.auth-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.auth-link p {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.auth-link a {
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-link a:hover {
+  text-decoration: underline;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* -------------------- 11) USER PROFILE CSS ---------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.profile-section {
+  width: 100%;
+}
+
+.profile-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.profile-card h2,
+.stats-card h2,
+.activity-card h2 {
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.profile-info .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.stats-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--primary-light);
+  border-radius: 8px;
+  border-left: 4px solid var(--primary-color);
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--background-color);
+  border-radius: 8px;
+}
+
+.activity-icon {
+  font-size: 1.2rem;
+  margin-top: 0.2rem;
+}
+
+.activity-content {
+  flex: 1;
+}
+
+.activity-content strong {
+  color: var(--text-primary);
+}
+
+.activity-time {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* ----------------------- 12) ADMIN CSS -------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+.admin-section {
+  width: 100%;
+}
+
+.simple-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: var(--background-color);
+  border-radius: 8px;
+  border: 2px solid var(--border-color);
+}
+
+.list-item span {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.btn-small {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+}
+
+.admin-section .simple-card {
+  margin-bottom: 2rem;
+}
+
+.admin-section .simple-card h2 {
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .list-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .list-item .btn {
+    align-self: flex-end;
+  }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* -------------------- 13) MEDIA CSS COMPONENTS -----------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+@media (max-width: 1050px) {
+  nav {
+    padding: 0 1rem;
+  }
+  label.logo {
+    font-size: 1.3rem;
+  }
+  nav ul li a {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.8rem;
+  }
+  .hero-section h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 890px) {
+  .checkbtn {
+    display: block;
+  }
+  nav ul {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: var(--footer-bg);
+    top: 70px;
+    left: -100%;
+    text-align: center;
+    flex-direction: column;
+    gap: 0;
+    transition: all 0.5s;
+    padding-top: 2rem;
+  }
+  #check:checked ~ ul {
+    left: 0;
+  }
+  nav ul li {
+    display: block;
+    margin: 1.5rem 0;
+    line-height: 1.5;
+  }
+  .footer-col {
+    width: 50%;
+  }
+  .hero-section h1 {
+    font-size: 2.5rem;
+  }
+  main#spapp > section {
+    padding: 30px 15px 40px;
+    min-height: calc(100vh - 70px - 180px);
+  }
+  .footer {
+    padding: 1.5rem 0 1rem;
+  }
+  .features-section {
+    padding: 3rem 0;
+  }
+  .features-section h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-features,
+  .values-grid,
+  .habits-grid,
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  .cta-buttons .btn {
+    width: 200px;
+  }
+  .footer-col {
+    width: 100%;
+  }
+  .hero-section h1 {
+    font-size: 2rem;
+  }
+  .hero-section p {
+    font-size: 1.1rem;
+  }
+  .habit-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .habit-actions {
+    flex-direction: column;
+  }
+  .habit-actions .btn {
+    width: 100%;
+  }
+  .post-user {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+  .post-actions {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .vote-btn,
+  .comment-btn {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+  }
+  .profile-container {
+    grid-template-columns: 1fr;
+  }
+  .profile-actions {
+    flex-direction: column;
+  }
+  .profile-actions .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 574px) {
+  main#spapp > section {
+    padding: 20px 10px 30px;
+  }
+  .footer {
+    padding: 1rem 0 0.5rem;
+  }
+  .footer-col {
+    margin-bottom: 0.5rem;
+  }
+  nav {
+    padding: 0 1rem;
+  }
+  .card {
+    padding: 1.5rem;
+  }
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  .cta-content {
+    padding: 2rem 1.5rem;
+  }
+  .cta-content h2 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .add-habit,
+  .habit-item {
+    padding: 1.5rem;
+  }
+  .habit-form {
+    max-width: 100%;
+  }
+  .create-post {
+    padding: 1.5rem;
+  }
+  .post-form {
+    max-width: 100%;
+  }
+  .post-content h3 {
+    font-size: 1.1rem;
+  }
+  .auth-container {
+    padding: 1.5rem;
+  }
+  .form-input {
+    padding: 10px;
+  }
+  .stat-item {
+    padding: 1rem;
+  }
+  .stat-value {
+    font-size: 1.5rem;
+  }
+  .activity-item {
+    padding: 0.8rem;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}

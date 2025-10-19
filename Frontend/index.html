@@ -1,0 +1,105 @@
+<!-- MAIN SITE -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="icon"
+      href="/Frontend/Assets/img/check-mark.png"
+      type="image/png"
+    />
+    <title>Habit Tracker</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="assets/css/spapp.css" />
+    <link rel="stylesheet" href="assets/css/custom.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Core JS libraries -->
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="assets/js/jquery.spapp.js"></script>
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <header>
+      <nav>
+        <input type="checkbox" id="check" />
+        <label for="check" class="checkbtn">
+          <i class="fas fa-bars"></i>
+        </label>
+        <label class="logo"><a href="#home">HabitTracker</a></label>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#habits">My Habits</a></li>
+          <li><a href="#community">Community</a></li>
+          <li><a href="#login">Login</a></li>
+          <li><a href="#register">Register</a></li>
+          <li><a href="#profile">Profile</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#admin">Admin</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main id="spapp" role="main">
+      <section id="home"></section>
+      <section id="habits"></section>
+      <section id="community"></section>
+      <section id="login"></section>
+      <section id="register"></section>
+      <section id="about"></section>
+      <section id="admin"></section>
+      <section id="profile"></section>
+      <section id="error_404"><h1>Error 404 - Page Not Found</h1></section>
+    </main>
+
+    <!-- FOOTER  -->
+    <footer class="footer">
+      <div class="container-footer">
+        <div class="row">
+          <div class="footer-col">
+            <h4>Navigation</h4>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#habits">My Habits</a></li>
+              <li><a href="#community">Community</a></li>
+              <li><a href="#login">Login</a></li>
+              <li><a href="#register">Register</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#profile">Profile</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Follow Me</h4>
+            <div class="social-links">
+              <a
+                href="https://github.com/AjdinOmeragic"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fab fa-github"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/ajdin-omeragic-91281329a/?originalSubdomain=ba"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fab fa-linkedin"></i>
+              </a>
+              <p>
+                © 2025 Habit Tracker. All rights reserved by Ajdin Omeragic.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="assets/js/custom.js"></script>
+  </body>
+</html>

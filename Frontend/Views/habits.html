@@ -1,0 +1,151 @@
+<!-- HABITS -->
+<section id="habits">
+  <div class="habits-section">
+    <div class="hero-section">
+      <div class="hero-content">
+        <h1>My Habits</h1>
+        <p>Manage your daily habits!</p>
+      </div>
+    </div>
+
+    <!-- New Habit -->
+    <div class="container">
+      <div class="add-habit card">
+        <h2>Add New Habit</h2>
+        <form class="habit-form">
+          <div class="form-group">
+            <input
+              type="text"
+              placeholder="Habit name (Morning Exercise, 30 Push up, etc...)"
+              class="form-input"
+            />
+          </div>
+          <div class="form-group">
+            <select class="form-input">
+              <option value="">Select category</option>
+              <option value="health">Health & Fitness</option>
+              <option value="learning">Learning</option>
+              <option value="productivity">Productivity</option>
+              <option value="mindfulness">Mindfulness</option>
+            </select>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            onclick="alert('Cant add new habits to a static page')"
+          >
+            Add Habit
+          </button>
+        </form>
+      </div>
+
+      <!-- Habits li -->
+      <div class="habits-list">
+        <h2>Your Habits</h2>
+        <div class="habits-container">
+          <!-- Habit 1 -->
+          <div class="card">
+            <div class="habit-header">
+              <h3>Morning Exercise</h3>
+              <span class="habit-category health">Health & Fitness</span>
+            </div>
+            <div class="habit-progress">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 75%"></div>
+              </div>
+              <span class="progress-text">3/4 days</span>
+            </div>
+            <div class="habit-actions">
+              <button
+                class="btn btn-primary"
+                onclick="alert('It is still a static page! Cant Mark it complete there is nothing to complete')"
+              >
+                Mark Complete
+              </button>
+              <button
+                class="btn btn-secondary"
+                onclick="alert('It is still a static page! Cant EDIT NOTHING TO EDIT')"
+              >
+                Edit
+              </button>
+              <button
+                class="btn btn-danger"
+                onclick="alert('It is still a static page! Cant Delete there is nothing TO DELETE')"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+
+          <!-- Habit 2 -->
+          <div class="card">
+            <div class="habit-header">
+              <h3>Gym Workout</h3>
+              <span class="habit-category health">Health & Fitness</span>
+            </div>
+            <div class="habit-progress">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 25%"></div>
+              </div>
+              <span class="progress-text">3/7 days</span>
+            </div>
+            <div class="habit-actions">
+              <button
+                class="btn btn-primary"
+                onclick="alert('It is still a static page! Cant Mark it complete there is nothing to complete')"
+              >
+                Mark Complete
+              </button>
+              <button
+                class="btn btn-secondary"
+                onclick="alert('It is still a static page! Cant EDIT NOTHING TO EDIT')"
+              >
+                Edit
+              </button>
+              <button
+                class="btn btn-danger"
+                onclick="alert('It is still a static page! Cant Delete there is nothing TO DELETE')"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+
+          <!-- Habit 3 -->
+          <div class="card">
+            <div class="habit-header">
+              <h3>Drink Water</h3>
+              <span class="habit-category health">Health & Fitness</span>
+            </div>
+            <div class="habit-progress">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 100%"></div>
+              </div>
+              <span class="progress-text">10/10 days</span>
+            </div>
+            <div class="habit-actions">
+              <button
+                class="btn btn-primary"
+                onclick="alert('It is still a static page! Cant Mark it complete there is nothing to complete')"
+              >
+                Mark Complete
+              </button>
+              <button
+                class="btn btn-secondary"
+                onclick="alert('It is still a static page! Cant EDIT NOTHING TO EDIT')"
+              >
+                Edit
+              </button>
+              <button
+                class="btn btn-danger"
+                onclick="alert('It is still a static page! Cant Delete there is nothing TO DELETE')"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

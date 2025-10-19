@@ -1,0 +1,27 @@
+main#spapp > section {
+  display: none;
+}
+
+main#spapp > section:last-child {
+  display: block;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+main#spapp > section:target {
+  display: block;
+  animation: appear 0.3s ease-out 1;
+}
+
+main#spapp > section:target ~ * {
+  display: none;
+}
