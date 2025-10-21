@@ -48,3 +48,5 @@ Assets
 - **6 Enteties (users, habits, habit completions, posts, comments, post likes)**
 
 ![Database Schema](./Frontend/Assets/img/DB.png)
+
+milestone 1 branch
