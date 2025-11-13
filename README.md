@@ -110,3 +110,5 @@ NOTE: Run php -S localhost:8000, In XAMP Turn on (Appache and MySQL)
 API Base URL: http://localhost/habittracker/Backend/
 
 Swagger Documentation: http://localhost/habittracker/Backend/public/v1/docs/
+
+...
