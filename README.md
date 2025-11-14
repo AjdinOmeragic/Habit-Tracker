@@ -71,3 +71,44 @@ Link: http://localhost/phpmyadmin
 ![Return configTest.php](./Frontend/Assets/img/ImageOfEverythingWorking.png)
 
 Steps: Go to php -S localhost:8000, in tab o http://localhost:8000/daoTests/configTest.php and there should be everything in working order
+
+# HabitTracker - Milestone 3 Completion
+
+## Milestone 3: Full CRUD Implementation & OpenAPI Documentation
+
+### 1. Business Logic Implementation (2pts) ✅
+
+**Services Layer with Business Logic:**
+
+- **BaseService.php** - Core service functionality
+- **UserService.php** - User registration with email validation and password hashing
+- **HabitService.php** - Habit creation with validation and default category assignment
+- **HabitCompletionService.php** - Prevents duplicate completions on same date
+- **PostService.php** - Post validation with title length limits
+- **PostLikeService.php** - Toggle like/unlike functionality
+- **CommentService.php** - Comment validation and nested replies support
+
+**Key Business Rules Implemented:**
+- Email and username uniqueness validation
+- Password hashing for security
+- Prevention of duplicate habit completions
+- Content length validation
+- Automatic timestamp management
+
+### 2. Presentation Layer (1pt) ✅
+
+**FlightPHP Micro-framework Implementation:**
+
+### 3. OpenAPI Documentation (2pts) ✅
+
+**Swagger Integration:**
+
+![Swagger](./Frontend/Assets/img/swager%20image.png)
+
+NOTE: Run php -S localhost:8000, In XAMP Turn on (Appache and MySQL)
+
+API Base URL: http://localhost/habittracker/Backend/
+
+Swagger Documentation: http://localhost/habittracker/Backend/public/v1/docs/
+
+...
