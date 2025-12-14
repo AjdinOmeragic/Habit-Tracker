@@ -2,45 +2,60 @@
 <section id="admin">
   <div class="admin-section">
     <div class="hero-section">
-      <h1>Admin Panel</h1>
+      <div class="hero-content">
+        <h1>Admin Panel</h1>
+        <p>Manage users, content, and system settings</p>
+      </div>
     </div>
 
     <div class="container">
-      <!-- Users -->
-      <div class="simple-card">
-        <h2>Users</h2>
-        <div class="simple-list">
-          <div class="list-item">
-            <span>john_doe (john@example.com)</span>
-            <button class="btn btn-small btn-danger">Delete</button>
-          </div>
-          <div class="list-item">
-            <span>jane_smith (jane@example.com)</span>
-            <button class="btn btn-small btn-danger">Delete</button>
-          </div>
-          <div class="list-item">
-            <span>admin_user (admin@example.com)</span>
-            <button class="btn btn-small btn-danger">Delete</button>
-          </div>
+      <!-- Users Section -->
+      <div class="simple-card card">
+        <h2>
+          Users
+          <span id="users-count" class="habit-category health">(0 users)</span>
+        </h2>
+        <div class="simple-list" id="users-container">
+          <div class="list-item">Loading users...</div>
         </div>
       </div>
 
-      <!-- Posts -->
-      <div class="simple-card">
-        <h2>Posts</h2>
-        <div class="simple-list">
-          <div class="list-item">
-            <span>"30 days of meditation completed!" by john_doe</span>
-            <button class="btn btn-small btn-danger">Delete</button>
-          </div>
-          <div class="list-item">
-            <span>"Need motivation for morning workouts" by jane_smith</span>
-            <button class="btn btn-small btn-danger">Delete</button>
-          </div>
-          <div class="list-item">
-            <span>"Reading streak: 45 days!" by book_lover</span>
-            <button class="btn btn-small btn-danger">Delete</button>
-          </div>
+      <!-- Posts Section -->
+      <div class="simple-card card">
+        <h2>
+          Posts
+          <span id="posts-count" class="habit-category learning"
+            >(0 posts)</span
+          >
+        </h2>
+        <div class="simple-list" id="posts-container">
+          <div class="list-item">Loading posts...</div>
+        </div>
+      </div>
+
+      <!-- Habits Section -->
+      <div class="simple-card card">
+        <h2>
+          Habits
+          <span id="habits-count" class="habit-category productivity"
+            >(0 habits)</span
+          >
+        </h2>
+        <div class="simple-list" id="habits-container">
+          <div class="list-item">Loading habits...</div>
+        </div>
+      </div>
+
+      <!-- Comments Section -->
+      <div class="simple-card card">
+        <h2>
+          Comments
+          <span id="comments-count" class="habit-category mindfulness"
+            >(0 comments)</span
+          >
+        </h2>
+        <div class="simple-list" id="comments-container">
+          <div class="list-item">Loading comments...</div>
         </div>
       </div>
     </div>

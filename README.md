@@ -89,6 +89,7 @@ Steps: Go to php -S localhost:8000, in tab o http://localhost:8000/daoTests/conf
 - **CommentService.php** - Comment validation and nested replies support
 
 **Key Business Rules Implemented:**
+
 - Email and username uniqueness validation
 - Password hashing for security
 - Prevention of duplicate habit completions
@@ -111,4 +112,48 @@ API Base URL: http://localhost/habittracker/Backend/
 
 Swagger Documentation: http://localhost/habittracker/Backend/public/v1/docs/
 
-...
+# 2. HabitTracker - Milestone 4 Completion
+
+
+## Milestone 4: Middleware, Authentication, and Authorization
+
+### 1. Authentication and Middleware (1pt) ✅
+
+AuthMiddleware.php - JWT token verification and validation
+
+Roles.php - Roles for users and admin
+
+AuthService.php - Secure authentication (JWT Generation with 24H Validation, Email and Username validation)
+
+Token Reading Issue Fix
+
+### 2. Authentication and Middleware (1pt) ✅
+
+Role Based Access Control
+
+### 3. Frontend Updates (3pts) ✅
+
+## base-service.js
+
+## habit-service.js - Users can create, edit, delete habits
+
+![PHPMYADMIN Pic](./Frontend/Assets/img/Editing%20a%20Habit.png)
+
+## post-service.js Users can create, edit, delete comments or posts
+
+![PHPMYADMIN Pic](./Frontend/Assets/img/Admin%20Control%20Panel.png)
+
+## profile-service.js Users can see theyre profiles (Username, email)
+
+![PHPMYADMIN Pic](./Frontend/Assets/img/Profile%20Image.png)
+
+## admin-service.js Admins can do what ever everyone else can
+
+![PHPMYADMIN Pic](./Frontend/Assets/img/Editing%20a%20Habit.png)
+
+## http://localhost/habittracker/Backend -> The Backend
+
+## Tests with Postman:
+
+![PHPMYADMIN Pic](./Frontend/Assets/img/Comments%20Route%20Postman%20Image.png)
+![PHPMYADMIN Pic](./Frontend/Assets/img/Get%20Users%20as%20Admin.png)

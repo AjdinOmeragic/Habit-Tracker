@@ -10,12 +10,13 @@
 
     <div class="container">
       <div class="auth-container card">
-        <form class="auth-form">
+        <form id="register-form" class="auth-form">
           <div class="form-group">
             <label for="username">Username</label>
             <input
               type="text"
               id="username"
+              name="username"
               placeholder="Choose a username"
               class="form-input"
               required
@@ -26,6 +27,7 @@
             <input
               type="email"
               id="email"
+              name="email"
               placeholder="Enter your email"
               class="form-input"
               required
@@ -36,6 +38,7 @@
             <input
               type="password"
               id="password"
+              name="password"
               placeholder="Create a password"
               class="form-input"
               required

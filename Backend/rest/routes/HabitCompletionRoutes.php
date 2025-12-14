@@ -1,9 +1,12 @@
 <?php
+require_once __DIR__ . '/../../data/Roles.php';
+
 /**
  * @OA\Get(
  *     path="/completions/habit/{habit_id}",
  *     tags={"completions"},
- *     summary="Get completions by habit ID",
+ *     summary="Get completions by habit ID - HABIT OWNER OR ADMIN",
+ *     security={{"ApiKey": {}}},
  *     @OA\Parameter(
  *         name="habit_id",
  *         in="path",
@@ -18,6 +21,18 @@
  * )
  */
 Flight::route('GET /completions/habit/@habit_id', function($habit_id) {
+    $current_user = Flight::get('user');
+    $habit = Flight::habitService()->get_by_id($habit_id);
+    
+    if (!$habit) {
+        Flight::halt(404, "Habit not found");
+    }
+    
+    // Only habit owner or admin can view completions
+    if ($current_user->role !== Roles::ADMIN && $current_user->id != $habit['user_id']) {
+        Flight::halt(403, "Unauthorized");
+    }
+    
     Flight::json(Flight::habitCompletionService()->get_by_habit_id($habit_id));
 });
 
@@ -25,7 +40,8 @@ Flight::route('GET /completions/habit/@habit_id', function($habit_id) {
  * @OA\Post(
  *     path="/completions",
  *     tags={"completions"},
- *     summary="Mark a habit as completed",
+ *     summary="Mark a habit as completed - HABIT OWNER ONLY",
+ *     security={{"ApiKey": {}}},
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
@@ -41,7 +57,20 @@ Flight::route('GET /completions/habit/@habit_id', function($habit_id) {
  * )
  */
 Flight::route('POST /completions', function() {
+    $current_user = Flight::get('user');
     $data = Flight::request()->data->getData();
+    $habit_id = $data['habit_id'];
+    
+    $habit = Flight::habitService()->get_by_id($habit_id);
+    if (!$habit) {
+        Flight::halt(404, "Habit not found");
+    }
+    
+    // Only habit owner can mark completions
+    if ($current_user->id != $habit['user_id']) {
+        Flight::halt(403, "Unauthorized - You can only mark your own habits as completed");
+    }
+    
     Flight::json(Flight::habitCompletionService()->mark_completed($data));
 });
 
@@ -49,7 +78,8 @@ Flight::route('POST /completions', function() {
  * @OA\Get(
  *     path="/completions/check/{habit_id}/{date}",
  *     tags={"completions"},
- *     summary="Check if habit is completed on specific date",
+ *     summary="Check if habit is completed on specific date - HABIT OWNER OR ADMIN",
+ *     security={{"ApiKey": {}}},
  *     @OA\Parameter(
  *         name="habit_id",
  *         in="path",
@@ -71,6 +101,16 @@ Flight::route('POST /completions', function() {
  * )
  */
 Flight::route('GET /completions/check/@habit_id/@date', function($habit_id, $date) {
+    $current_user = Flight::get('user');
+    $habit = Flight::habitService()->get_by_id($habit_id);
+    
+    if (!$habit) {
+        Flight::halt(404, "Habit not found");
+    }
+    if ($current_user->role !== Roles::ADMIN && $current_user->id != $habit['user_id']) {
+        Flight::halt(403, "Unauthorized");
+    }
+    
     $isCompleted = Flight::habitCompletionService()->is_completed_on_date($habit_id, $date);
     Flight::json(['completed' => $isCompleted]);
 });
@@ -79,7 +119,8 @@ Flight::route('GET /completions/check/@habit_id/@date', function($habit_id, $dat
  * @OA\Get(
  *     path="/habit-completions",
  *     tags={"completions"},
- *     summary="Get all habit completions",
+ *     summary="Get all habit completions - ADMIN ONLY",
+ *     security={{"ApiKey": {}}},
  *     @OA\Response(
  *         response=200,
  *         description="Array of all habit completions"
@@ -87,6 +128,7 @@ Flight::route('GET /completions/check/@habit_id/@date', function($habit_id, $dat
  * )
  */
 Flight::route('GET /habit-completions', function() {
+    Flight::auth_middleware()->authorizeRoles([Roles::ADMIN]);
     Flight::json(Flight::habitCompletionService()->get_all());
 });
 ?>
