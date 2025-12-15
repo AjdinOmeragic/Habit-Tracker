@@ -239,6 +239,7 @@ nav ul li a {
   text-transform: uppercase;
   font-weight: 500;
   transition: all 0.3s ease;
+  text-decoration: none !important;
 }
 
 nav ul li a:hover,

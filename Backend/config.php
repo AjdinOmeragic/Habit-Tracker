@@ -25,4 +25,7 @@ class Config
     {
         return '127.0.0.1';
     }
+    public static function JWT_SECRET() {
+        return 'AjdinWasHere';
+    }
 }
