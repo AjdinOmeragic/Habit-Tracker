@@ -1,3 +1,13 @@
+# 5. HabitTracker - Milestone 5: Deployment
+
+<h1 align="center" style="font-size: 2.5em; margin: 50px 0;">
+  <a href="https://habittracker.yzz.me" style="color: #007bff; text-decoration: none;">
+     habittracker.yzz.me
+  </a>
+</h1>
+
+## If for some reason there are issues do to the Service provider please try through incognito mode or disabling the cookies
+
 # 1. HabitTracker - Milestone 1 Completion
 
 ## Milestone 1: Static Frontend Development
@@ -113,7 +123,6 @@ API Base URL: http://localhost/habittracker/Backend/
 Swagger Documentation: http://localhost/habittracker/Backend/public/v1/docs/
 
 # 2. HabitTracker - Milestone 4 Completion
-
 
 ## Milestone 4: Middleware, Authentication, and Authorization
 
