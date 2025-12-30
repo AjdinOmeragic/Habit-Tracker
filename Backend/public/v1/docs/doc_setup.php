@@ -15,7 +15,11 @@
  * @OA\Server(
  *     url="http://localhost/habittracker/Backend",
  *     description="Local development server"
- * )
+ * ),
+ * @OA\Server(
+ *     url="https://habittracker.yzz.me/habittracker/Backend",
+ *     description="Production API server"
+ * ),
  */
 
 /**

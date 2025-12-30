@@ -7,6 +7,39 @@ class Config
 {
     public static function DB_NAME()
     {
+        return 'yzzme_40760724_habittracker';
+    }
+    public static function DB_PORT()
+    {
+        return  3306;
+    }
+    public static function DB_USER()
+    {
+        return 'yzzme_40760724';
+    }
+    public static function DB_PASSWORD()
+    {
+        return 'm5OA8SEYF0If';
+    }
+    public static function DB_HOST()
+    {
+        return 'sql213.yzz.me';
+    }
+    public static function JWT_SECRET() {
+        return 'AjdinWasHere';
+    }
+}
+
+/* Local Deployment
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL ^ (E_NOTICE | E_DEPRECATED));
+
+class Config
+{
+    public static function DB_NAME()
+    {
         return 'habittracker';
     }
     public static function DB_PORT()
@@ -28,4 +61,4 @@ class Config
     public static function JWT_SECRET() {
         return 'AjdinWasHere';
     }
-}
+}*/

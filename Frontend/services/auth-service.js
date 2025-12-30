@@ -1,49 +1,165 @@
 let AuthService = {
   init: function () {
-    $("#login-form").submit(function (e) {
-      e.preventDefault();
-      const entity = Object.fromEntries(new FormData(this).entries());
-      AuthService.login(entity);
+    $("#login-form").validate({
+      rules: {
+        email: {
+          required: true,
+          email: true,
+        },
+        password: {
+          required: true,
+          minlength: 6,
+        },
+      },
+      messages: {
+        email: "Please enter a valid email address",
+        password: {
+          required: "Please enter your password",
+          minlength: "Password must be at least 6 characters long",
+        },
+      },
+      submitHandler: function (form) {
+        const entity = Object.fromEntries(new FormData(form).entries());
+        AuthService.login(entity);
+      },
     });
 
-    $("#register-form").submit(function (e) {
-      e.preventDefault();
-      const entity = Object.fromEntries(new FormData(this).entries());
-      AuthService.register(entity);
+    $("#register-form").validate({
+      rules: {
+        username: {
+          required: true,
+          minlength: 3,
+          maxlength: 50,
+        },
+        email: {
+          required: true,
+          email: true,
+        },
+        password: {
+          required: true,
+          minlength: 6,
+          maxlength: 20,
+        },
+      },
+      messages: {
+        username: {
+          required: "Please enter a username",
+          minlength: "Username must be at least 3 characters",
+          maxlength: "Username cannot exceed 50 characters",
+        },
+        email: "Please enter a valid email address",
+        password: {
+          required: "Please enter a password",
+          minlength: "Password must be at least 6 characters long",
+          maxlength: "Password cannot exceed 20 characters",
+        },
+      },
+      submitHandler: function (form) {
+        const entity = Object.fromEntries(new FormData(form).entries());
+        AuthService.register(entity);
+      },
     });
   },
 
   login: function (entity) {
-    RestClient.post("auth/login", entity, function (response) {
-      localStorage.setItem("user_token", response.data.token);
-      if (response.data.user) {
-        localStorage.setItem("user_info", JSON.stringify(response.data.user));
-      } else {
-        const user = AuthService.getCurrentUserFromToken();
-        if (user) {
-          localStorage.setItem("user_info", JSON.stringify(user));
+    $.blockUI({
+      message:
+        '<div class="blockui-message"><i class="fas fa-spinner fa-spin"></i><h3>Logging in...</h3></div>',
+      css: {
+        border: "none",
+        padding: "15px",
+        backgroundColor: "#000",
+        opacity: 0.8,
+        color: "#fff",
+        borderRadius: "10px",
+      },
+    });
+
+    RestClient.post(
+      "auth/login",
+      entity,
+      function (response) {
+        localStorage.setItem("user_token", response.data.token);
+        if (response.data.user) {
+          localStorage.setItem("user_info", JSON.stringify(response.data.user));
+        } else {
+          const user = AuthService.getCurrentUserFromToken();
+          if (user) {
+            localStorage.setItem("user_info", JSON.stringify(user));
+          }
+        }
+
+        $.unblockUI();
+        toastr.success("Welcome back!");
+        AuthService.updateNavigation();
+        window.location.replace("#habits");
+      },
+      function (error) {
+        $.unblockUI();
+        if (error.responseJSON && error.responseJSON.message) {
+          toastr.error(error.responseJSON.message);
+        } else {
+          toastr.error("Login failed. Please check your credentials.");
         }
       }
-
-      toastr.success("Welcome back!");
-      AuthService.updateNavigation();
-      window.location.replace("#habits");
-    });
+    );
   },
 
   register: function (entity) {
-    RestClient.post("auth/register", entity, function (response) {
-      toastr.success("Account created! Please login.");
-      window.location.replace("#login");
+    $.blockUI({
+      message:
+        '<div class="blockui-message"><i class="fas fa-spinner fa-spin"></i><h3>Creating account...</h3></div>',
+      css: {
+        border: "none",
+        padding: "15px",
+        backgroundColor: "#000",
+        opacity: 0.8,
+        color: "#fff",
+        borderRadius: "10px",
+      },
     });
+
+    RestClient.post(
+      "auth/register",
+      entity,
+      function (response) {
+        $.unblockUI();
+        toastr.success("Account created! Please login.");
+        window.location.replace("#login");
+      },
+      function (error) {
+        $.unblockUI();
+        if (error.responseJSON && error.responseJSON.message) {
+          toastr.error(error.responseJSON.message);
+        } else {
+          toastr.error("Registration failed. Please try again.");
+        }
+      }
+    );
   },
 
   logout: function () {
-    localStorage.removeItem("user_token");
-    localStorage.removeItem("user_info");
-    toastr.success("Logged out successfully");
-    AuthService.updateNavigation();
-    window.location.replace("#home");
+    $.blockUI({
+      message:
+        '<div class="blockui-message"><i class="fas fa-spinner fa-spin"></i><h3>Logging out...</h3></div>',
+      css: {
+        border: "none",
+        padding: "15px",
+        backgroundColor: "#000",
+        opacity: 0.8,
+        color: "#fff",
+        borderRadius: "10px",
+      },
+    });
+
+    setTimeout(function () {
+      localStorage.removeItem("user_token");
+      localStorage.removeItem("user_info");
+      $.unblockUI();
+      toastr.success("Logged out successfully");
+      AuthService.updateNavigation();
+      window.location.replace("#home");
+    }, 500);
   },
 
   updateNavigation: function () {

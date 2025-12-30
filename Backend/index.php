@@ -6,8 +6,11 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Authorization, Content-Type");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Authorization, Content-Type, X-Requested-With, Access-Control-Allow-Headers, Origin, Accept");
+header("Access-Control-Expose-Headers: Authorization");
+header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Max-Age: 86400");
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit(0);

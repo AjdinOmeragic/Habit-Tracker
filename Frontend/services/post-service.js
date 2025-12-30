@@ -2,17 +2,67 @@ let PostService = {
   init: function () {
     if (!BaseService.requireAuth()) return;
     this.loadPosts();
-    BaseService.setupForm("#create-post-form", (data) => this.createPost(data));
+    $("#create-post-form").validate({
+      rules: {
+        title: {
+          required: true,
+          minlength: 3,
+          maxlength: 200,
+        },
+        content: {
+          required: true,
+          minlength: 10,
+          maxlength: 5000,
+        },
+      },
+      messages: {
+        title: {
+          required: "Please enter a post title",
+          minlength: "Title must be at least 3 characters",
+          maxlength: "Title cannot exceed 200 characters",
+        },
+        content: {
+          required: "Please enter post content",
+          minlength: "Content must be at least 10 characters",
+          maxlength: "Content cannot exceed 5000 characters",
+        },
+      },
+      submitHandler: function (form) {
+        const data = Object.fromEntries(new FormData(form).entries());
+        PostService.createPost(data);
+        form.reset();
+      },
+    });
   },
 
   loadPosts: function () {
-    BaseService.loadData("posts", (posts) => {
-      if (posts?.length) {
-        this.renderPosts(posts);
-      } else {
-        this.showNoPosts();
-      }
+    $("#posts-container").block({
+      message:
+        '<div class="blockui-message"><i class="fas fa-spinner fa-spin"></i><h4>Loading posts...</h4></div>',
+      css: {
+        border: "none",
+        padding: "15px",
+        backgroundColor: "rgba(0,0,0,0.7)",
+        color: "#fff",
+        borderRadius: "10px",
+      },
     });
+
+    BaseService.loadData(
+      "posts",
+      (posts) => {
+        $("#posts-container").unblock();
+        if (posts?.length) {
+          this.renderPosts(posts);
+        } else {
+          this.showNoPosts();
+        }
+      },
+      function (error) {
+        $("#posts-container").unblock();
+        toastr.error("Failed to load posts");
+      }
+    );
   },
 
   renderPosts: function (posts) {
@@ -62,7 +112,11 @@ let PostService = {
             <div class="add-comment">
               <textarea class="form-input" id="comment-input-${
                 post.id
-              }" placeholder="Add a comment..." rows="2"></textarea>
+              }" placeholder="Add a comment (minimum 3 characters)..." rows="2"
+              minlength="3" maxlength="1000" required></textarea>
+              <div class="invalid-feedback" style="display: none; margin-top: 5px;">
+                Comment must be 3-1000 characters
+              </div>
               <button class="btn btn-primary btn-small" onclick="PostService.addComment(${
                 post.id
               })">
@@ -104,12 +158,58 @@ let PostService = {
   },
 
   createPost: function (postData) {
-    BaseService.createData("posts", postData, () => this.loadPosts());
+    $.blockUI({
+      message:
+        '<div class="blockui-message"><i class="fas fa-spinner fa-spin"></i><h4>Creating post...</h4></div>',
+      css: {
+        border: "none",
+        padding: "15px",
+        backgroundColor: "#000",
+        opacity: 0.8,
+        color: "#fff",
+        borderRadius: "10px",
+      },
+    });
+
+    BaseService.createData(
+      "posts",
+      postData,
+      () => {
+        $.unblockUI();
+        toastr.success("Post created successfully!");
+        this.loadPosts();
+      },
+      function (error) {
+        $.unblockUI();
+        if (error.responseJSON && error.responseJSON.message) {
+          toastr.error(error.responseJSON.message);
+        } else {
+          toastr.error("Failed to create post");
+        }
+      }
+    );
   },
 
   deletePost: function (postId) {
-    if (confirm("Delete this post?")) {
-      BaseService.deleteData("posts", postId, () => this.loadPosts());
+    if (confirm("Are you sure you want to delete this post?")) {
+      $.blockUI({
+        message:
+          '<div class="blockui-message"><i class="fas fa-spinner fa-spin"></i><h4>Deleting post...</h4></div>',
+        css: {
+          border: "none",
+          padding: "15px",
+          backgroundColor: "#000",
+          opacity: 0.8,
+          color: "#fff",
+          borderRadius: "10px",
+        },
+      });
+
+      BaseService.deleteData("posts", postId, () => {
+        $.unblockUI();
+        toastr.success("Post deleted successfully!");
+        this.loadPosts();
+      });
     }
   },
 
@@ -120,17 +220,42 @@ let PostService = {
       return;
     }
 
-    BaseService.createData("likes/toggle", { post_id: postId }, (response) => {
-      const likeCountSpan = $(`#like-count-${postId}`);
-      const currentLikes = parseInt(likeCountSpan.text()) || 0;
-      if (response.action === "liked") {
-        likeCountSpan.text(currentLikes + 1);
-        toastr.success("Post liked!");
-      } else {
-        likeCountSpan.text(Math.max(0, currentLikes - 1));
-        toastr.info("Like removed");
-      }
+    $.blockUI({
+      message:
+        '<div class="blockui-message"><i class="fas fa-spinner fa-spin"></i><h4>Processing...</h4></div>',
+      css: {
+        border: "none",
+        padding: "15px",
+        backgroundColor: "#000",
+        opacity: 0.8,
+        color: "#fff",
+        borderRadius: "10px",
+      },
+      timeout: 1000,
     });
+
+    BaseService.createData(
+      "likes/toggle",
+      { post_id: postId },
+      (response) => {
+        const likeCountSpan = $(`#like-count-${postId}`);
+        const currentLikes = parseInt(likeCountSpan.text()) || 0;
+        if (response.action === "liked") {
+          likeCountSpan.text(currentLikes + 1);
+          toastr.success("Post liked!");
+        } else {
+          likeCountSpan.text(Math.max(0, currentLikes - 1));
+          toastr.info("Like removed");
+        }
+      },
+      function (error) {
+        if (error.responseJSON && error.responseJSON.message) {
+          toastr.error(error.responseJSON.message);
+        } else {
+          toastr.error("Failed to like/unlike post");
+        }
+      }
+    );
   },
 
   showComments: function (postId) {
@@ -140,13 +265,28 @@ let PostService = {
   },
 
   loadComments: function (postId) {
-    BaseService.loadData(`comments/post/${postId}`, (comments) => {
-      let html = "";
-      if (!comments?.length) {
-        html = `<div class="no-comments"><i class="fas fa-comment-slash"></i><p>No comments yet. Be the first to comment!</p></div>`;
-      } else {
-        comments.forEach((comment) => {
-          html += `
+    $(`#comments-list-${postId}`).block({
+      message:
+        '<div class="blockui-message"><i class="fas fa-spinner fa-spin"></i><h5>Loading comments...</h5></div>',
+      css: {
+        border: "none",
+        padding: "10px",
+        backgroundColor: "rgba(0,0,0,0.5)",
+        color: "#fff",
+        borderRadius: "5px",
+      },
+    });
+
+    BaseService.loadData(
+      `comments/post/${postId}`,
+      (comments) => {
+        $(`#comments-list-${postId}`).unblock();
+        let html = "";
+        if (!comments?.length) {
+          html = `<div class="no-comments"><i class="fas fa-comment-slash"></i><p>No comments yet. Be the first to comment!</p></div>`;
+        } else {
+          comments.forEach((comment) => {
+            html += `
             <div class="comment-item">
               <div class="comment-header">
                 <strong>${comment.user_username || "Anonymous"}</strong>
@@ -157,26 +297,62 @@ let PostService = {
               <p>${comment.content}</p>
             </div>
           `;
-        });
+          });
+        }
+        $(`#comments-list-${postId}`).html(html);
+        $(`#comment-count-${postId}`).text(comments?.length || 0);
+      },
+      function (error) {
+        $(`#comments-list-${postId}`).unblock();
+        toastr.error("Failed to load comments");
       }
-      $(`#comments-list-${postId}`).html(html);
-      $(`#comment-count-${postId}`).text(comments?.length || 0);
-    });
+    );
   },
 
   addComment: function (postId) {
     const content = $(`#comment-input-${postId}`).val().trim();
+
     if (!content) {
       toastr.warning("Please enter a comment");
+      $(`#comment-input-${postId}`).focus();
       return;
     }
+
+    if (content.length < 3) {
+      toastr.warning("Comment must be at least 3 characters");
+      $(`#comment-input-${postId}`).focus();
+      return;
+    }
+
+    $.blockUI({
+      message:
+        '<div class="blockui-message"><i class="fas fa-spinner fa-spin"></i><h4>Posting comment...</h4></div>',
+      css: {
+        border: "none",
+        padding: "15px",
+        backgroundColor: "#000",
+        opacity: 0.8,
+        color: "#fff",
+        borderRadius: "10px",
+      },
+    });
 
     BaseService.createData(
       "comments",
       { content: content, post_id: postId },
       () => {
+        $.unblockUI();
         $(`#comment-input-${postId}`).val("");
+        toastr.success("Comment posted!");
         this.loadComments(postId);
+      },
+      function (error) {
+        $.unblockUI();
+        if (error.responseJSON && error.responseJSON.message) {
+          toastr.error(error.responseJSON.message);
+        } else {
+          toastr.error("Failed to post comment");
+        }
       }
     );
   },
